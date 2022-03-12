@@ -2,18 +2,18 @@
 \usepackage[utf8]{inputenc}
 \usepackage{color}
 
-\studycycle{Informatyka, studia STACJONARNE, I st.}
+\studycycle{Informatyka, studia NIESTACJONARNE, I st.}
 \coursesemester{VI}
 
 \coursename{Komputerowe systemy rozpoznawania}
-\courseyear{2020/2021}
+\courseyear{2021/2022}
 
-\courseteacher{tytuł/stopień imię nazwisko}
-\coursegroup{dzień, godzina zajęć}
+\courseteacher{dr inż. Marcin Kacprowicz}
+\coursegroup{niedziela, 8:00}
 
 \author{
-  \studentinfo{Autor Pierwszy}{229940} \and
-  \studentinfo{Autor Drugi}{nr albumu 2} }
+  \studentinfo{Przemysław Lis}{229940} \and
+  \studentinfo{Paweł Cichocki}{nr albumu 2} }
 
 \title{Projekt 1. Klasyfikacja dokumentów tekstowych}
 
@@ -31,36 +31,32 @@ zrozumieć.\\
 opisie Projektu 1. i Harmonogramie Zajęć na WIKAMP KSR jako efekty zadań w~poszczególnych tygodniach}. 
 
 \section{Cel projektu}
-Zwięzły (2-3 zdania) opis
-problemu badawczego/obliczeniowego,  uwzględniający część badawczą i
-implementacyjną. {\bf Nie przepisuj literatury ani teorii -- napisz krótko jak
-rozumiesz to co masz wykonać: jakie działania, na jakim zbiorze danych (link lub
-przypis), jaki jest spodziewany efekt}.\\
-\indent Zamieszczony opis (własny, nie skopiowany) zawiera
-przypisy do literatury (bibliografii) zamieszczonej na końcu raportu/sprawozdania
-zgodnie z~Polską Normą cytowania bibliografii (zob. materiały BG PŁ pt. ,,Bibliografia
-załącznikowa'').\\
+Celem projektu jest sparsowanie danych i przeanalizowanie do jakiego kraju odnosi się 
+dany artykuł. Do wykonania zadania wykorzystamy algorytm k-NN aby należycie dopasować
+kraj. Oczekujemy że nasz program po analizie danych algorytmem będzie w stanie poprawnie
+dopasować kraj o którym mowa lub z którego pochodzi artykuł.\\
 \noindent {\bf Sekcja uzupełniona jako efekt zadania Tydzień 02 wg Harmonogramu Zajęć
 na WIKAMP KSR.}
 
 
 \section{Klasyfikacja nadzorowana metodą $k$-NN}
-Krótki opis metody $k$-NN: zasada działania, wymagane parametry wejściowe, format
-i~znaczenie wyników/rezultatów. Opis własny z przypisami do literatury -- minimum
-teorii potrzebnej do zadania, tak by inżynier innej specjalności zrozumiał dalszy
-opis \cite{tadeusiewicz90}. {\bf Nie przepisuj literatury ani teorii -- napisz krótko jak
+k-NN jest to algorytm  regresji nieparametrycznej. Założeniem algorytmu jest że podobne problemy mają podobne rozwiązania. Algorytm sprawdza n najbliższych sąsiadów wystąpienia i w zalezności od wyniku klasyfikuje jego położenie. jeżeli w sąsiedztwie naszego artykułu badawczego będzie najwięcej węzłów danego typu, to wtedy zostanie on odpowiednio dopasowany do danego typu.
+Parametrem wejściowym jest plik tekstowy, który następnie będzie zaklasyfikowany do odpowiedniego kraju. {\bf Nie przepisuj literatury ani teorii -- napisz krótko jak
 rozumiesz to co masz wykonać w tym konkretnym przypadku}.\\
 \noindent {\bf Sekcja uzupełniona jako efekt zadania Tydzień 02 wg Harmonogramu Zajęć
 na WIKAMP KSR.}
 
 \subsection{Ekstrakcja cech, wektory cech}
-Wyekstrahowane cechy liczbowe i tekstowe dokumentów, min. 10 cech, wszystkie
-opisane słownie oraz wzorami, z objaśnieniem oznaczeń i przykładami użycia, do
-tego precyzyjny opis możliwych wartości, które przyjmuje dana cecha (ułatwiający
-czytelnikowi zrozumienie znaczenia w zadaniu klasyfikacji). Pamiętaj, że wybrane
-cechy muszą reprezentować obiekt niezależnie od innych tekstów w tym samym lub w
-innym zbiorze. Podaj postać wektora wartości cech po procesie ekstrakcji. Użyte oznaczenia są jednolite w całym
-raporcie/sprawozdaniu. \\ 
+1. najwięcej wyrazów w pierwszych 5 zdaniach.\\
+2. kraj w całym tekscie występujący najwięcej ilość razy.\\
+3. długość artykułu.\\
+4. średnia dlugość słowa.\\
+5. liczba unikalnych słów.\\
+6. liczba słów zaczynająca się dużą literą.\\
+7. liczba słów nie przekraczająca 3 znaków.\\
+8. liczba słów.\\
+9. liczba słów dłuższych niż 8 znaków.\\
+10. litera na którą zaczyna się najwięcej słów z wielkiej litery \\ 
 \noindent {\bf Sekcja uzupełniona jako efekt zadania Tydzień 02 wg Harmonogramu Zajęć
 na WIKAMP KSR.}
 
