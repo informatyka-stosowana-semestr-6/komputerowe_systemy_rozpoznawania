@@ -7,5 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         //test
         LoadData ld = new LoadData("data_test/");
+        //All
+//        LoadData ld = new LoadData("data/");
     }
 }
