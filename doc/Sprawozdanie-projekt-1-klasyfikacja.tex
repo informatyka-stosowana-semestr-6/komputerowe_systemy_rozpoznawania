@@ -48,14 +48,42 @@ na WIKAMP KSR.}
 
 \subsection{Ekstrakcja cech, wektory cech}
 1. Najwięcej wyrazów w pierwszych 5 zdaniach.\\
+\begin{displaymath}
+\sum_{i = 0}^{5} s_i \textrm{, gdzie s - słowo}\\
+\end{displaymath}
+
 2. Stosunek liczby wystąpień słów kluczowych do długości tekstu.\\
+\begin{displaymath}
+\frac{\sum_{i=0}^{n}s_i}{d}\textrm{, gdzie s - słowo kluczowe, d - długość tekstu}
+\end{displaymath}
 3. Długość artykułu.\\
+\begin{displaymath}
+\sum_{i = 0}^{n} l_i \textrm{, gdzie l - litera}\\
+\end{displaymath}
 4. Średnia dlugość słowa.\\
+\begin{displaymath}
+\frac{\sum_{i=0}^{n}l_i}{\sum_{j=0}^{n}s_j}\textrm{, gdzie l - litera, s - słowo}
+\end{displaymath}
 5. Liczba unikalnych słów.\\
+\begin{displaymath}
+\sum_{i = 0}^{n} s_i \textrm{, gdzie s - słowo unikalne}\\
+\end{displaymath}
 6. Liczba słów zaczynająca się dużą literą.\\
+\begin{displaymath}
+\sum_{i=0}^{n}s_i \textrm{,gdzie s - słowo zaczynające się na wielką literę}
+\end{displaymath}
 7. Liczba słów nie przekraczająca 3 znaków.\\
+\begin{displaymath}
+\sum_{i=0}^{n}len(s_i)<= 3 \textrm{,gdzie s - słowo}
+\end{displaymath}
 8. Liczba słów.\\
+\begin{displaymath}
+\sum_{i = 0}^{n} s_i \textrm{, gdzie s - słowo}\\
+\end{displaymath}
 9. Liczba słów dłuższych niż 8 znaków.\\
+\begin{displaymath}
+\sum_{i=0}^{n}len(s_i) > 8 \textrm{,gdzie s - słowo}
+\end{displaymath}
 10. Litera na którą zaczyna się najwięcej słów z wielkiej litery \\ 
 \noindent {\bf Sekcja uzupełniona jako efekt zadania Tydzień 02 wg Harmonogramu Zajęć
 na WIKAMP KSR.}
