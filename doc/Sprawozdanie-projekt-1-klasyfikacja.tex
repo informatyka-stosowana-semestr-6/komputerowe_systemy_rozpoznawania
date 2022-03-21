@@ -1,6 +1,7 @@
 \documentclass{classrep}
 \usepackage[utf8]{inputenc}
 \usepackage{color}
+\usepackage{graphicx}
 
 \studycycle{Informatyka, studia NIESTACJONARNE, I st.}
 \coursesemester{VI}
@@ -35,16 +36,13 @@ Celem projektu jest sparsowanie danych i przeanalizowanie do jakiego kraju odnos
 dany artykuł. Do wykonania zadania wykorzystamy algorytm k-NN aby należycie dopasować
 kraj. Oczekujemy że nasz program po analizie danych algorytmem będzie w stanie poprawnie
 dopasować kraj o którym mowa lub z którego pochodzi artykuł.\\
-\noindent {\bf Sekcja uzupełniona jako efekt zadania Tydzień 02 wg Harmonogramu Zajęć
-na WIKAMP KSR.}
+\noindent
 
 
 \section{Klasyfikacja nadzorowana metodą $k$-NN}
 k-NN jest to algorytm  regresji nieparametrycznej. Założeniem algorytmu jest że podobne problemy mają podobne rozwiązania. Algorytm sprawdza n najbliższych sąsiadów wystąpienia i w zalezności od wyniku klasyfikuje jego położenie. Jeżeli w sąsiedztwie naszego artykułu badawczego będzie najwięcej węzłów danego typu, to wtedy zostanie on odpowiednio dopasowany do danego typu.
-Parametrem wejściowym jest plik tekstowy, który następnie będzie zaklasyfikowany do odpowiedniego kraju. {\bf Nie przepisuj literatury ani teorii -- napisz krótko jak
-rozumiesz to co masz wykonać w tym konkretnym przypadku}.\\
-\noindent {\bf Sekcja uzupełniona jako efekt zadania Tydzień 02 wg Harmonogramu Zajęć
-na WIKAMP KSR.}
+Parametrem wejściowym jest plik tekstowy, który następnie będzie zaklasyfikowany do odpowiedniego kraju.\\
+\noindent
 
 \subsection{Ekstrakcja cech, wektory cech}
 1. Najwięcej wyrazów w pierwszych 5 zdaniach.\\
@@ -85,22 +83,32 @@ na WIKAMP KSR.}
 \sum_{i=0}^{n}len(s_i) > 8 \textrm{,gdzie s - słowo}
 \end{displaymath}
 10. Litera na którą zaczyna się najwięcej słów z wielkiej litery \\ 
-\noindent {\bf Sekcja uzupełniona jako efekt zadania Tydzień 02 wg Harmonogramu Zajęć
-na WIKAMP KSR.}
+\noindent
 
 \subsection{Miary jakości klasyfikacji} 
-Miary jakości klasyfikacji (Accuracy, Precision,
-Recall, F1). We wprowadzeniu zaprezentować minimum teorii potrzebnej do realizacji
-zadania, tak by inżynier innej specjalności zrozumiał dalszy opis. Należy podać {\bf konkretne wzory miar użyte w tym eksperymencie oraz krótko
-opisać ich znaczenie i zakresy przyjmowanych wartości. Należy podać przykłądowe
-wartości każdej miary. Nie przepisuj
-teorii, ale podaj link/przypis i opisz jak rozumiesz jej zastosowanie w tym konkretnym
-zadaniu}. \\
-\indent Stosowane wzory, oznaczenia z objaśnieniami znaczenia symboli użytych w
-doświadczeniu. Oznaczenia jednolite w obrębie całego sprawozdania.  Opis zawiera przypisy do bibliografii zgodnie z
-Polską Normą, (zob. materiały BG PŁ).\\
-\noindent {\bf Sekcja uzupełniona jako efekt zadania Tydzień 03 wg Harmonogramu Zajęć
-na WIKAMP KSR.}
+{\bf Accuracy} - to miara która określa dokładność klasyfikacji. Jest to stosunek ilości poprawnie zaklasyfikowanych artykułów do wszystkich artykułów. \\
+Określona wzorem:
+\begin{displaymath}
+accuracy = \frac{\textrm{liczba poprawnie zaklasyfikowanych artykułów}}{\textrm{liczba wszystkich artykułów}}
+\end{displaymath}
+
+{\bf Precision} - to miara określająca precyzję klasyfikacji elementów do danej klasy. Liczona jest tak jak accuracy, lecz w obrębie pewnej klasy.\\
+Określa się wzorem:
+\begin{displaymath}
+precision = \frac{\textrm{liczba poprawnie zaklasyfikowanych artykułów do klasy X}}{\textrm{liczba wszystkich artykułów zaklasyfikowanych do klasy X}}
+\end{displaymath}
+
+{\bf Recall} - jest to miara oznaczająca odsetek poprawnie zaklasyfikowanych artykułów do danej klasy.\\
+Określa się wzorem:
+\begin{displaymath}
+recall = \frac{\textrm{liczba poprawnie zaklasyfikowanych artykułów do klasy X}}{\textrm{liczba wszystkich artykułów klasy X}}
+\end{displaymath}
+
+{\bf F1} - jest to miara uśredniająca wynik. Liczona jest poprzez średnią harmoniczną precision oraz recall.\\
+Określa się wzorem:
+\begin{displaymath}
+F1 = 2 \cdot  \frac{precision \cdot recall}{precision + recall}
+\end{displaymath}
 
 
 \section{Klasyfikacja z użyciem metryk i miar podobieństwa tekstów}
@@ -117,10 +125,15 @@ na WIKAMP KSR.}
 
 \section{Budowa aplikacji}
 \subsection{Diagramy UML}
-Diagramy UML i zwięzłe opisy: idei aplikacji, modułu ekstrakcji i modułu
+Program będzie posiadł klasę Main króta będzie zarządzać całym programem. Będą do niej dołączone klasy takie jak Algorithms, LoadData czy Characteristic. Do załadowania plików posłuży nam klasa LoadData, która będzie ładować artykuły do klasy Article za pomocą paternu z klasy SGAFileNormalizer.
 klasyfikatora.\\
-\noindent {\bf Sekcja uzupełniona jako efekt zadania Tydzień 03 wg Harmonogramu Zajęć
-na WIKAMP KSR.}
+\begin{figure}[!htbp]
+	\centering
+     \includegraphics[width=\textwidth]{img/uml.png}
+	\caption{Diagram UML całego projektu}
+\end{figure}
+
+
 
 \subsection{Prezentacja wyników, interfejs użytkownika} 
 Krótki ilustrowany opis jak użytkownik może korzystać z aplikacji, w~szczególności wprowadzać parametry klasyfikacji i odczytywać wyniki. Wersja JRE i inne wymogi
