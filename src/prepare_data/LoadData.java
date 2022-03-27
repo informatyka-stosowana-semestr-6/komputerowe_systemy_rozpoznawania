@@ -34,7 +34,12 @@ public class LoadData {
 
         }
         System.out.println(articles.size());
-//        System.out.println(articles.toString());
+        System.out.println(articles.toString());
     }
+
+    public List<Article> getArticles(){
+        return this.articles;
+    }
+
 
 }

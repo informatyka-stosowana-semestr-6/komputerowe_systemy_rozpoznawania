@@ -22,6 +22,7 @@ public class SGAFileNormalizer {
             reuters.places = getSeparatedStringsPatternD(matcher.group(2).replaceAll("&lt;", "<"));
             reuters.title = matcher.group(3).replaceAll("&lt;", "<");
             reuters.body = matcher.group(4).replaceAll("&lt;", "<");
+            reuters.split();
             reuters_articles.add(reuters);
         }
         return reuters_articles;
