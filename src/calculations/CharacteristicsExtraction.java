@@ -1,5 +1,6 @@
 package calculations;
 
+import prepare_data.Article;
 import prepare_data.Characteristic;
 
 public final class CharacteristicsExtraction {
@@ -42,9 +43,8 @@ public final class CharacteristicsExtraction {
         return calc;
     }
 
-    public static Characteristic c8 (String article){
-        Characteristic calc = null;
-        return calc;
+    public static Characteristic c8 (Article article){
+        return new Characteristic("c8", (double) article.words.size());
     }
 
     public static Characteristic c9 (String article){

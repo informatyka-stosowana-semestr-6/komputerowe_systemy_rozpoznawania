@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collector;
 
 public class DocumentsClassification{
-
     private List<Article> articles;
 
     public DocumentsClassification() throws IOException {
@@ -18,6 +17,9 @@ public class DocumentsClassification{
         this.articles = ld.getArticles();
     }
 
+    public List<Article> getArticles() {
+        return articles;
+    }
     public void calculateCharacteristics() {
         for (Article article: articles) {
 //            article.characteristics.add(CharacteristicsExtraction.c1(article.body));
@@ -27,7 +29,7 @@ public class DocumentsClassification{
 //            article.characteristics.add(CharacteristicsExtraction.c5(article.body));
 //            article.characteristics.add(CharacteristicsExtraction.c6(article.body));
 //            article.characteristics.add(CharacteristicsExtraction.c7(article.body));
-//            article.characteristics.add(CharacteristicsExtraction.c8(article.body));
+            article.characteristics.add(CharacteristicsExtraction.c8(article));
 //            article.characteristics.add(CharacteristicsExtraction.c9(article.body));
 //            article.characteristics.add(CharacteristicsExtraction.c10(article.body));
         }

@@ -2,6 +2,7 @@ package prepare_data;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class Article implements Serializable {
     public String title = "";
     public List<String> places;
     public List<String> words;
-    public List<Characteristic> characteristics;
+    public List<Characteristic> characteristics = new ArrayList<>();
     public String date = "";
     public String body = "";
 
@@ -29,8 +30,17 @@ public class Article implements Serializable {
 //                "\n topics=" + topics +
                 "\n places=" + places +
 //                "\n body=" + body +
-                "\n words=" + words.size() +
-                "\n}s";
+//                "\n words=" + words.size() +
+                toStringCharacteristics() +
+                "\n} " ;
+    }
+
+    public String toStringCharacteristics() {
+        String result = "";
+        for (Characteristic str: characteristics) {
+            result += str.toString();
+        }
+        return result;
     }
 
 

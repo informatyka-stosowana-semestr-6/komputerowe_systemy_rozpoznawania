@@ -27,6 +27,8 @@ public class Characteristic {
         return name;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "\nCharacteristic{" + getName() + "; value: " + getValue() + "}";
+    }
 }

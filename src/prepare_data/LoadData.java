@@ -28,13 +28,12 @@ public class LoadData {
         List<File> files = Arrays.asList(directory.listFiles());
 
         for (File f : files ) {
-            System.out.println(f);
-            System.out.println(Files.readString(f.toPath()));
+//            System.out.println(f);
+//            System.out.println(Files.readString(f.toPath()));
             articles.addAll(SGAFileNormalizer.parseString(Files.readString(f.toPath())));
 
         }
         System.out.println(articles.size());
-        System.out.println(articles.toString());
     }
 
     public List<Article> getArticles(){
