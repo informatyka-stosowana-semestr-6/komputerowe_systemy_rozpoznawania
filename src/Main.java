@@ -11,7 +11,7 @@ public class Main {
         DocumentsClassification documents = new DocumentsClassification();
         documents.calculateCharacteristics();
 
-        System.out.println("Size" + documents.getArticles().size());
+        System.out.println("Size: " + documents.getArticles().size());
         for (Article article: documents.getArticles()) {
             System.out.println(article.toString());
         }
