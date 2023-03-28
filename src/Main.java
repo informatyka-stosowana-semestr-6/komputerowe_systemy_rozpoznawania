@@ -1,22 +1,14 @@
-import calculations.DocumentsClassification;
 import prepare_data.Article;
-import prepare_data.LoadData;
+import prepare_data.Loader;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        //test
-        DocumentsClassification documents = new DocumentsClassification();
-        documents.calculateCharacteristics();
-
-        System.out.println("Size: " + documents.getArticles().size());
-        for (Article article: documents.getArticles()) {
-            System.out.println(article.toString());
-        }
-
-        //All
-//        LoadData ld = new LoadData("data/");
+        Loader loader = new Loader("data_test/");
+        List<Article> articles = loader.loadData();
+        System.out.println(articles.get(0));
     }
 }
