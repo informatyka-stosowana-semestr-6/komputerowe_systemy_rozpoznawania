@@ -9,6 +9,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Loader loader = new Loader("data_test/");
         List<Article> articles = loader.loadData();
-        System.out.println(articles.get(0));
+        System.out.println(articles.get(0).places);
     }
 }

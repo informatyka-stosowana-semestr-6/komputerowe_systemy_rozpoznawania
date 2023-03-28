@@ -9,7 +9,7 @@ import java.util.List;
 public class Loader {
     final private String directoryPath;
 
-    public Loader(String directoryPath) throws IOException {
+    public Loader(String directoryPath){
         this.directoryPath = directoryPath;
     }
 

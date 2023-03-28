@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Article implements Serializable {
-    //    public List<String> topics;
+//    public List<String> topics;
     public String title = "";
     public List<String> places;
     public List<String> words;
