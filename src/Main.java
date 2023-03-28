@@ -1,3 +1,4 @@
+import calculations.Characteristics;
 import prepare_data.Article;
 import prepare_data.Loader;
 
@@ -10,5 +11,10 @@ public class Main {
         Loader loader = new Loader("data_test/");
         List<Article> articles = loader.loadData();
         System.out.println(articles.get(0).getPlaces());
+        Characteristics characteristics = new Characteristics();
+        for (Article article: articles) {
+            System.out.println(characteristics.characteristicVector(article));
+
+        }
     }
 }
