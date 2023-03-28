@@ -7,16 +7,41 @@ import java.util.List;
 
 public class Article implements Serializable {
 //    public List<String> topics;
-    public String title = "";
-    public List<String> places;
-    public List<String> words;
-    public String date = "";
-    public String body = "";
+    private String title = "";
+    private final List<String> places;
+    private List<String> words;
+    private String date = "";
+    private String body = "";
 
-    public Article() {
+    public Article(String title, List<String> places, String date, String body) {
+        this.title = title;
+        this.places = places;
+        this.date = date;
+        this.body = body;
+        this.setWords();
     }
 
-    public void setWords() {
+    private void setWords() {
         this.words = Arrays.asList(body.replaceAll("[^a-zA-Z \n]", "").split("\\s+"));
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public List<String> getPlaces() {
+        return places;
+    }
+
+    public List<String> getWords() {
+        return words;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getBody() {
+        return body;
     }
 }

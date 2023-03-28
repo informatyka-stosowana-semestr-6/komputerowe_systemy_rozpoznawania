@@ -13,14 +13,12 @@ public class SGAFileExtractor {
         ArrayList<Article> allArticles = new ArrayList<>();
         Matcher matcher = EXTRACTION_PATTERN.matcher(fileData);
         while (matcher.find()) {
-            Article article = new Article();
-            article.date = matcher.group(1);
-            article.places = getSeparatedPlaces(matcher.group(2).replaceAll("&lt;", "<"));
-            article.title = matcher.group(3).replaceAll("&lt;", "<");
-            article.body = matcher.group(4).replaceAll("&lt;", "<");
-            article.setWords();
+            String date = matcher.group(1);
+            List<String> places = getSeparatedPlaces(matcher.group(2).replaceAll("&lt;", "<"));
+            String title = matcher.group(3).replaceAll("&lt;", "<");
+            String body = matcher.group(4).replaceAll("&lt;", "<");
 
-            allArticles.add(article);
+            allArticles.add(new Article(title, places, date, body));
         }
         return allArticles;
     }
