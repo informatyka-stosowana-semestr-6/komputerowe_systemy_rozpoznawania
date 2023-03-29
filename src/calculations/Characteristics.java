@@ -66,10 +66,10 @@ public class Characteristics {
         return 10;
     }
 
-    public List<Object> getCharacteristicVector(Article article){
+    public List<Object> getCharacteristicVector(Article article) {
         List<Object> vector = new ArrayList<>();  // This allows to store all objects (e.g. int or str)
 
-        for (String characteristic: this.characteristicsNamesList) {
+        for (String characteristic : this.characteristicsNamesList) {
             vector.add(this.functionMap.get(characteristic).apply(article));
         }
         return vector;
