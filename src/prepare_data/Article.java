@@ -12,6 +12,7 @@ public class Article implements Serializable {
     private List<String> words;
     private String date = "";
     private String body = "";
+    private List<Object> characteristicVector;
 
     public Article(String title, List<String> places, String date, String body) {
         this.title = title;
@@ -43,5 +44,13 @@ public class Article implements Serializable {
 
     public String getBody() {
         return body;
+    }
+
+    public List<Object> getCharacteristicVector() {
+        return characteristicVector;
+    }
+
+    public void setCharacteristicVector(List<Object> characteristicVector) {
+        this.characteristicVector = characteristicVector;
     }
 }
