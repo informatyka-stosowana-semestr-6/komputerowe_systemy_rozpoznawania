@@ -1,12 +1,11 @@
 import calculations.Characteristics;
 import calculations.CharacteristicsEnum;
+import calculations.KNearestNeighbors;
 import prepare_data.Article;
 import prepare_data.Loader;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -26,14 +25,21 @@ public class Main {
         /////////////
         // Main
         /////////////
-        Loader loader = new Loader("data_test/");
+        Loader loader = new Loader("data/");
         List<Article> articles = loader.loadData();
         // There we can define all characteristics C1 - C10
         Characteristics characteristics = new Characteristics(debugImplementedCharacteristics);
+        for (Article article : articles) {characteristics.addCharacteristicVectorToArticle(article);}
 
-        for (Article article : articles) {
-            characteristics.addCharacteristicVectorToArticle(article);
-            System.out.println(article.getCharacteristicVector());
-        }
+        double splitPoint = 0.8;
+        int splitIndex = (int) (articles.size() * splitPoint);
+        Collections.shuffle(articles, new Random(12));
+
+        List<Article> traineeArticles = new ArrayList<>(articles.subList(0, splitIndex));
+        List<Article> testArticles = new ArrayList<>(articles.subList(splitIndex, articles.size()));
+
+        KNearestNeighbors knn = new KNearestNeighbors(traineeArticles, testArticles, "euclidean", 3);
+        knn.predict();
+
     }
 }
