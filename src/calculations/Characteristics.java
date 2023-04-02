@@ -97,7 +97,7 @@ public class Characteristics {
                 }
             }
         }
-        return null;
+        return "";
     }
 
     private int c7(Article article) {
@@ -165,7 +165,7 @@ public class Characteristics {
         }
 
         int maxCount = 0;
-        String mostFrequentElement = null;
+        String mostFrequentElement = "";
         for (String keyWord : keyWordsOccurrence) {
             int count = Collections.frequency(keyWordsOccurrence, keyWord);
             if (count > maxCount) {

@@ -2,8 +2,8 @@ package prepare_data;
 
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 
 public class Article implements Serializable {
     //    public List<String> topics;
@@ -13,6 +13,8 @@ public class Article implements Serializable {
     private String date = "";
     private String body = "";
     private List<Object> characteristicVector;
+    private String predictedPlace;
+    private Map<Article, Double> distancesVector = new LinkedHashMap<>();
 
     public Article(String title, List<String> places, String date, String body) {
         this.title = title;
@@ -52,5 +54,29 @@ public class Article implements Serializable {
 
     public void setCharacteristicVector(List<Object> characteristicVector) {
         this.characteristicVector = characteristicVector;
+    }
+
+    public String getPredictedPlace() {
+        return predictedPlace;
+    }
+
+    public void setPredictedPlace(String predictedPlace) {
+        this.predictedPlace = predictedPlace;
+    }
+
+    public Map<Article, Double> getDistancesVector() {
+        return distancesVector;
+    }
+    public void sortDistanceVector()
+    {
+        // Sortujemy mapę po wartościach
+        Map<Article, Double> sortedMap = new LinkedHashMap<>();
+        this.getDistancesVector().entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
+        this.distancesVector = sortedMap;
+    }
+    public void addDistanceVector(Article article, double distance) {
+        this.distancesVector.put(article, distance);
     }
 }
