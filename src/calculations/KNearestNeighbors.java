@@ -2,11 +2,8 @@ package calculations;
 
 import prepare_data.Article;
 
-import java.sql.Array;
 import java.util.*;
 import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class KNearestNeighbors {
     List<Article> traineeArticles;
@@ -86,7 +83,7 @@ public class KNearestNeighbors {
         List<Double> distanceVector = new ArrayList<>();
 
         for (int i = 0; i < vector1.size(); i++) {
-            if ((vector1.get(i) instanceof Number) & (vector2.get(i) instanceof Number)) {
+            if ((vector1.get(i) instanceof Number) && (vector2.get(i) instanceof Number)) {
                 double diff = ((Number) vector1.get(i)).doubleValue() - ((Number) vector2.get(i)).doubleValue();
                 distanceVector.add(diff);
             } else {
@@ -101,19 +98,17 @@ public class KNearestNeighbors {
             for (Article traineeArticle : this.traineeArticles) {
                 double distance = this.distanceFunction.apply(testArticle.getCharacteristicVector(), traineeArticle.getCharacteristicVector());
                 testArticle.addDistanceVector(traineeArticle, distance);
-                testArticle.sortDistanceVector();
             }
-
-            List<Article> kNearestArticles = new ArrayList<>(testArticle.getDistancesVector().keySet().stream().toList());
+            testArticle.sortDistanceVector();
+            List<Article> kNearestArticles = new ArrayList<>(testArticle.getDistancesVector().keySet().stream().toList().subList(0, this.k));
             Map<String, Integer> kNearestPlaces = new LinkedHashMap<>();
             for (Article article : kNearestArticles) {
-                for (String place : article.getPlaces()) {
-                    if (kNearestPlaces.containsKey(place)) {
-                        int lastValue = kNearestPlaces.get(place);
-                        kNearestPlaces.put(place, lastValue + 1);
-                    } else {
-                        kNearestPlaces.put(place, 1);
-                    }
+                String place = article.getPlace();
+                if (kNearestPlaces.containsKey(place)) {
+                    int lastValue = kNearestPlaces.get(place);
+                    kNearestPlaces.put(place, lastValue + 1);
+                } else {
+                    kNearestPlaces.put(place, 1);
                 }
             }
             Map<String, Integer> sortedKNearestPlaces = new LinkedHashMap<>();
@@ -121,7 +116,7 @@ public class KNearestNeighbors {
                     .sorted(Map.Entry.comparingByValue())
                     .forEachOrdered(x -> sortedKNearestPlaces.put(x.getKey(), x.getValue()));
             testArticle.setPredictedPlace(sortedKNearestPlaces.keySet().stream().toList().get(sortedKNearestPlaces.size() - 1));
-            System.out.println(testArticle.getPlaces());
+            System.out.println(testArticle.getPlace());
             System.out.println(testArticle.getPredictedPlace());
             System.out.println("#######################################");
         }

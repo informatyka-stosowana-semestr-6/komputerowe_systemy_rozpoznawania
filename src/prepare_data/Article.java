@@ -3,12 +3,11 @@ package prepare_data;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.function.Function;
 
 public class Article implements Serializable {
     //    public List<String> topics;
     private String title = "";
-    private final List<String> places;
+    private final String place;
     private List<String> words;
     private String date = "";
     private String body = "";
@@ -16,9 +15,9 @@ public class Article implements Serializable {
     private String predictedPlace;
     private Map<Article, Double> distancesVector = new LinkedHashMap<>();
 
-    public Article(String title, List<String> places, String date, String body) {
+    public Article(String title, String place, String date, String body) {
         this.title = title;
-        this.places = places;
+        this.place = place;
         this.date = date;
         this.body = body;
         this.setWords();
@@ -32,8 +31,8 @@ public class Article implements Serializable {
         return title;
     }
 
-    public List<String> getPlaces() {
-        return places;
+    public String getPlace() {
+        return place;
     }
 
     public List<String> getWords() {
