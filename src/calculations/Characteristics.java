@@ -10,8 +10,10 @@ import java.util.regex.Pattern;
 public class Characteristics {
     final private List<String> characteristicsNamesList;
     final private Map<String, Function<Article, ?>> functionMap = new HashMap<>();  // question mark allows to return all values (e.g. str or int)
-    // TODO C6
-    private List<String> continentNames = List.of(new String[]{"Europe", "European", "America", "American", "Asia", "Asian"});
+    private final List<String> continentNames = List.of("Europe", "European", "America", "American", "Asia", "Asian");
+    private final List<String> cityNames = List.of("Berlin", "Frankfurt", "Bonn", "Leverkusen", "Nuremberg", "Hanover",
+            "Weisbaden", "Stuttgart", "Monachium", "Tokyo", "Yokohama", "Ottawa", "Paris", "Lyon", "Torronto", "London",
+            "Manchester", "Liverpool", "Birmingham", "Washington", "New York", "Boston", "Los Angeles");
 
     public Characteristics(List<String> characteristicsNamesList) {
         this.characteristicsNamesList = characteristicsNamesList;
@@ -95,7 +97,7 @@ public class Characteristics {
                 }
             }
         }
-        return "";
+        return null;
     }
 
     private int c7(Article article) {
@@ -145,12 +147,33 @@ public class Characteristics {
         return wordNumber;
     }
 
-    private int c10(Article article) {
+    private String c10(Article article) {
         /*
         Najliczniej występująca nazwa własna miasta bądź regionu ze zbioru C10
         w pierwszych pięciu zdaniach artykułu.
          */
-        throw new UnsupportedOperationException("Not implemented yet.");
+        // Lower all words
+        List<String> words = List.of(article.getBody().toLowerCase().split("\\W+"));
+        List<String> keyWordsOccurrence = new ArrayList<>();
+
+        for (String word : words) {
+            for (String keyWord : this.cityNames) {
+                if (word.equals(keyWord.toLowerCase())) {
+                    keyWordsOccurrence.add(keyWord);
+                }
+            }
+        }
+
+        int maxCount = 0;
+        String mostFrequentElement = null;
+        for (String keyWord : keyWordsOccurrence) {
+            int count = Collections.frequency(keyWordsOccurrence, keyWord);
+            if (count > maxCount) {
+                maxCount = count;
+                mostFrequentElement = keyWord;
+            }
+        }
+        return mostFrequentElement;
     }
 
     public void addCharacteristicVectorToArticle(Article article) {

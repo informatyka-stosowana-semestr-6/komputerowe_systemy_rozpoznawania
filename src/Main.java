@@ -21,7 +21,8 @@ public class Main {
                         CharacteristicsEnum.C6.getValue(),
                         CharacteristicsEnum.C7.getValue(),
                         CharacteristicsEnum.C8.getValue(),
-                        CharacteristicsEnum.C9.getValue()));
+                        CharacteristicsEnum.C9.getValue(),
+                        CharacteristicsEnum.C10.getValue()));
         /////////////
         // Main
         /////////////
