@@ -81,12 +81,21 @@ public class Characteristics {
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
-    private int c6(Article article) {
+    private String c6(Article article) {
         /*
         Pierwsze wystąpienie we fragmencie tekstu nazwy kontynentu lub jego
         mieszkańca.
          */
-        throw new UnsupportedOperationException("Not implemented yet.");
+        // split string to words with lowercase
+        List<String> words = List.of(article.getBody().toLowerCase().split("\\W+"));
+        for (String word : words) {
+            for (String keyWord : this.continentNames) {
+                if (word.equals(keyWord.toLowerCase())) {
+                    return keyWord;
+                }
+            }
+        }
+        return "";
     }
 
     private int c7(Article article) {
