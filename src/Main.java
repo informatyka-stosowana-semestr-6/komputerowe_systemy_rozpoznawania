@@ -11,14 +11,27 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        ////////////////////////////////
+        // This is only for debug mode
+        ///////////////////////////////
+        List<String> debugImplementedCharacteristics = new ArrayList<>(
+                Arrays.asList(CharacteristicsEnum.C1.getValue(),
+                        CharacteristicsEnum.C3.getValue(),
+                        CharacteristicsEnum.C4.getValue(),
+                        CharacteristicsEnum.C7.getValue(),
+                        CharacteristicsEnum.C8.getValue(),
+                        CharacteristicsEnum.C9.getValue()));
+        /////////////
+        // Main
+        /////////////
         Loader loader = new Loader("data_test/");
         List<Article> articles = loader.loadData();
         // There we can define all characteristics C1 - C10
-        Characteristics characteristics = new Characteristics(new ArrayList<>(Arrays.asList(CharacteristicsEnum.C1.getValue(), CharacteristicsEnum.C2.getValue())));
+        Characteristics characteristics = new Characteristics(debugImplementedCharacteristics);
 
         for (Article article : articles) {
-            System.out.println(characteristics.getCharacteristicVector(article));
-            // TODO maybe we should store this vector inside article object
+            characteristics.addCharacteristicVectorToArticle(article);
+            System.out.println(article.getCharacteristicVector());
         }
     }
 }
