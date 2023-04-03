@@ -116,9 +116,6 @@ public class KNearestNeighbors {
                     .sorted(Map.Entry.comparingByValue())
                     .forEachOrdered(x -> sortedKNearestPlaces.put(x.getKey(), x.getValue()));
             testArticle.setPredictedPlace(sortedKNearestPlaces.keySet().stream().toList().get(sortedKNearestPlaces.size() - 1));
-            System.out.println(testArticle.getPlace());
-            System.out.println(testArticle.getPredictedPlace());
-            System.out.println("#######################################");
         }
     }
 
