@@ -17,6 +17,7 @@ public class Main {
                 Arrays.asList(CharacteristicsEnum.C1.getValue(),
                         CharacteristicsEnum.C3.getValue(),
                         CharacteristicsEnum.C4.getValue(),
+                        CharacteristicsEnum.C5.getValue(),
                         CharacteristicsEnum.C6.getValue(),
                         CharacteristicsEnum.C7.getValue(),
                         CharacteristicsEnum.C8.getValue(),
