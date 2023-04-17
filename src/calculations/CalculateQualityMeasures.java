@@ -19,6 +19,66 @@ public class CalculateQualityMeasures {
     private int numberOfArticles;
     private final List<String> places = new ArrayList<>();
 
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
+
+    public double getAccuracy() {
+        return accuracy;
+    }
+
+    public void setAccuracy(double accuracy) {
+        this.accuracy = accuracy;
+    }
+
+    public List<Precision> getPrecision() {
+        return precision;
+    }
+
+    public void setPrecision(List<Precision> precision) {
+        this.precision = precision;
+    }
+
+    public List<Recall> getRecall() {
+        return recall;
+    }
+
+    public void setRecall(List<Recall> recall) {
+        this.recall = recall;
+    }
+
+    public List<F1> getF1() {
+        return f1;
+    }
+
+    public void setF1(List<F1> f1) {
+        this.f1 = f1;
+    }
+
+    public double getF1AllClasses() {
+        return f1AllClasses;
+    }
+
+    public void setF1AllClasses(double f1AllClasses) {
+        this.f1AllClasses = f1AllClasses;
+    }
+
+    public int getNumberOfArticles() {
+        return numberOfArticles;
+    }
+
+    public void setNumberOfArticles(int numberOfArticles) {
+        this.numberOfArticles = numberOfArticles;
+    }
+
+    public List<String> getPlaces() {
+        return places;
+    }
+
     public CalculateQualityMeasures(List<Article> articles) {
         this.articles = articles;
         this.numberOfArticles = articles.size();

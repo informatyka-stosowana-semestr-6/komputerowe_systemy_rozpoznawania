@@ -16,6 +16,7 @@ public class Main {
         ///////////////////////////////
         List<String> debugImplementedCharacteristics = new ArrayList<>(
                 Arrays.asList(CharacteristicsEnum.C1.getValue(),
+                        CharacteristicsEnum.C2.getValue(),
                         CharacteristicsEnum.C3.getValue(),
                         CharacteristicsEnum.C4.getValue(),
                         CharacteristicsEnum.C5.getValue(),
@@ -45,6 +46,7 @@ public class Main {
 
         CalculateQualityMeasures qualityMetrics = new CalculateQualityMeasures(articles);
         qualityMetrics.calculateMeasures();
+        System.out.println(qualityMetrics.getAccuracy());
         // Now this object contains all information about measures, it can be shown in GUI
 
     }
