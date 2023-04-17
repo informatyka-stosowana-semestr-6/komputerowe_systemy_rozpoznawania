@@ -37,7 +37,7 @@ public class CalculateQualityMeasures {
         places.add("canada");
         places.add("japan");
     }
-    public void calculateAccuracy() {
+    private void calculateAccuracy() {
         int properClassifiedArticle = 0;
 
         for (Article article : this.articles) {
@@ -48,7 +48,7 @@ public class CalculateQualityMeasures {
         this.accuracy = (double) properClassifiedArticle / this.numberOfArticles;
     }
 
-    public void calculatePrecision() {
+    private void calculatePrecision() {
         for (Article article : this.articles) {
             for (Precision precisionObject : this.precision) {
                 if (Objects.equals(article.getPredictedPlace(), precisionObject.getPlaceName())) {
@@ -64,7 +64,7 @@ public class CalculateQualityMeasures {
             precisionObject.calculatePrecision();
         }
     }
-    public void calculateRecall(){
+    private void calculateRecall(){
         for (Article article : this.articles) {
             for (Recall recallObject : this.recall) {
                 if (Objects.equals(article.getPlace(), recallObject.getPlaceName())) {
@@ -81,12 +81,12 @@ public class CalculateQualityMeasures {
         }
     }
 
-    public void calculateF1(){
+    private void calculateF1(){
         for(int i = 0; i < this.f1.size(); i++){
             this.f1.get(i).calculateF1(precision.get(i).getPrecision(), recall.get(i).getRecall());
         }
     }
-    public void calculateF1ForAllClasses(){
+    private void calculateF1ForAllClasses(){
         double meter = 0; // licznik
         double denominator = 0; // mianownik
 
