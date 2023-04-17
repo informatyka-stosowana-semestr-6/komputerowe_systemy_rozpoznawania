@@ -43,12 +43,24 @@ public class Characteristics {
         return result;
     }
 
-    private int c2(Article article) {
+    private double c2(Article article) {
         /*
          Stosunek liczby wystąpień słów kluczowych do długości tekstu.
          */
-        throw new UnsupportedOperationException("Not implemented yet.");
-//        return 0;
+        List<String> words = List.of(article.getBody().toLowerCase().split("\\W+"));
+        List<String> keyWords =  new ArrayList<>();
+        keyWords.addAll(this.continentNames);
+        keyWords.addAll(this.cityNames);
+        int numberOfUniqueWord = 0;
+
+        for (String word : words) {
+            for(String keyWord: keyWords){
+                if (word.equals(keyWord.toLowerCase())) {
+                    numberOfUniqueWord++;
+                }
+            }
+        }
+        return (double)numberOfUniqueWord / this.c8(article);
     }
 
     private int c3(Article article) {
