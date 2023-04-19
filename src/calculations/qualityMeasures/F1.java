@@ -9,6 +9,7 @@ public class F1 {
     }
 
     public void setPlaceName(String placeName) {
+        System.out.println(placeName);
         this.placeName = placeName;
     }
 
