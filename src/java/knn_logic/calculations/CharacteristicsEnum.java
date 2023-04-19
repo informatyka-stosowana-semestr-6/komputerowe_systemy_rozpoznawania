@@ -1,4 +1,4 @@
-package calculations;
+package java.knn_logic.calculations;
 
 public enum CharacteristicsEnum {
     C1("c1"),

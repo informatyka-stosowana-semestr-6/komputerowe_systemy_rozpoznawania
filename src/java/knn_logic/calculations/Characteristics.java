@@ -1,6 +1,8 @@
-package calculations;
+package java.knn_logic.calculations;
 
-import prepare_data.Article;
+
+
+import java.knn_logic.prepare_data.Article;
 
 import java.util.*;
 import java.util.function.*;
@@ -92,25 +94,7 @@ public class Characteristics {
         /*
         Liczba unikalnych słów.
          */
-        Map<String, Integer> wordsOccurrence = new HashMap<>();
-        List<String> words = List.of(article.getBody().toLowerCase().split("\\W+"));
-
-        for (String word : words) {
-            if (wordsOccurrence.containsKey(word)) {
-                int lastValue = wordsOccurrence.get(word);
-                wordsOccurrence.put(word, lastValue + 1);
-            } else {
-                wordsOccurrence.put(word, 1);
-            }
-        }
-        int uniqueValues = 0;
-        for (int value :
-                wordsOccurrence.values()) {
-            if (value == 1) {
-                uniqueValues += 1;
-            }
-        }
-        return uniqueValues;
+        throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     private String c6(Article article) {

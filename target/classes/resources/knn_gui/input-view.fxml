@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<?import org.controlsfx.control.CheckComboBox?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="java.knn_gui.InputController">
+   <children>
+      <VBox layoutX="16.0" layoutY="14.0" prefHeight="275.0" prefWidth="569.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="42.0" prefWidth="255.0" text="Stosunek zbioru uczącego (train/test)" />
+                  <ChoiceBox fx:id="test_train_ratio" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="42.0" prefWidth="255.0" text="K najbliższych sąsiadów" />
+                  <TextField fx:id="knn_value" prefWidth="149.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="43.0" prefWidth="255.0" text="Cechy" />
+                  <CheckComboBox fx:id="characteristic" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="43.0" prefWidth="255.0" text="Metryka" />
+                  <ChoiceBox fx:id="metric" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <CheckBox fx:id="seed_checkbox" mnemonicParsing="false" onAction="#onCheckboxClicked" prefHeight="43.0" prefWidth="255.0" text="Seed" />
+                  <TextField fx:id="seed_value" prefWidth="149.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <CheckBox fx:id="data_normalized" mnemonicParsing="false" onAction="#onCheckboxClicked" prefHeight="43.0" prefWidth="255.0" text="Znormalizowane dane" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button fx:id="start_button" layoutX="10.0" layoutY="303.0" mnemonicParsing="false" prefWidth="580.0" text="Dobrze jest!" />
+      <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="28.0" layoutY="364.0" prefHeight="313.0" prefWidth="392.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER" text="Precision" GridPane.columnIndex="1" />
+            <Label text="Recall" GridPane.columnIndex="2" />
+            <Label text="F1" GridPane.columnIndex="3" />
+            <Label text="USA" GridPane.rowIndex="1" />
+            <Label text="UK" GridPane.rowIndex="2" />
+            <Label text="Canada" GridPane.rowIndex="3" />
+            <Label text="France" GridPane.rowIndex="5" />
+            <Label text="Japan" GridPane.rowIndex="6" />
+            <Label text="Średnia" GridPane.rowIndex="7" />
+            <Label fx:id="precision_USA" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="recall_USA" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="f1_USA" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="precision_UK" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="recall_UK" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="f1_UK" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label fx:id="precision_Canada" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="recall_Canada" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label fx:id="f1_Canada" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Label fx:id="precision_France" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="recall_France" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label fx:id="f1_France" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <Label fx:id="precision_Japan" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="recall_Japan" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Label fx:id="f1_Japan" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <Label fx:id="precision_Mean" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label fx:id="recall_Mean" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Label fx:id="f1_Mean" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <Label text="Germany" GridPane.rowIndex="4" />
+            <Label fx:id="precision_Germany" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="recall_Germany" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label fx:id="f1_Germany" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+         </children>
+      </GridPane>
+      <Label layoutX="486.0" layoutY="383.0" text="Accuracy" />
+      <TextField fx:id="accuracy" disable="true" editable="false" layoutX="436.0" layoutY="412.0" />
+   </children>
+</AnchorPane>

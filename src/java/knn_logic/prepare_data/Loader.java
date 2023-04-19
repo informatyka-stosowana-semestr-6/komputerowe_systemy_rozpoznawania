@@ -1,4 +1,4 @@
-package prepare_data;
+package java.knn_logic.prepare_data;
 
 import java.io.File;
 import java.io.IOException;

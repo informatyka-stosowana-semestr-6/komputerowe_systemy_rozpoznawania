@@ -1,10 +1,10 @@
-package prepare_data;
+package java.knn_logic.prepare_data;
 
 
 import java.io.Serializable;
 import java.util.*;
 
-public class Article implements Serializable {
+public class Article implements Serializable, Cloneable {
     //    public List<String> topics;
     private String title = "";
     private final String place;
@@ -13,6 +13,7 @@ public class Article implements Serializable {
     private String body = "";
     private List<Object> characteristicVector;
     private String predictedPlace;
+    private String articleType;
     private Map<Article, Double> distancesVector = new LinkedHashMap<>();
 
     public Article(String title, String place, String date, String body) {
@@ -47,6 +48,14 @@ public class Article implements Serializable {
         return body;
     }
 
+    public String getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(String articleType) {
+        this.articleType = articleType;
+    }
+
     public List<Object> getCharacteristicVector() {
         return characteristicVector;
     }
@@ -77,5 +86,18 @@ public class Article implements Serializable {
     }
     public void addDistanceVector(Article article, double distance) {
         this.distancesVector.put(article, distance);
+    }
+
+    @Override
+    public Article clone() {
+        try {
+            Article clone = (Article) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            
+
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

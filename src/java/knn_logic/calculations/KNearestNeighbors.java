@@ -1,9 +1,10 @@
-package calculations;
+package java.knn_logic.calculations;
 
-import prepare_data.Article;
+import java.knn_logic.prepare_data.Article;
 
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 public class KNearestNeighbors {
     List<Article> traineeArticles;
@@ -15,8 +16,8 @@ public class KNearestNeighbors {
         this.traineeArticles = traineeArticles;
         this.testArticles = testArticles;
         this.k = k;
-        if (Objects.equals(distanceType, "czebyszewDistance")) this.distanceFunction = this::czebyszewDistance;
-        else if (Objects.equals(distanceType, "manhattanDistance")) this.distanceFunction = this::manhattanDistance;
+        if (Objects.equals(distanceType, "Czebyszewa")) this.distanceFunction = this::czebyszewDistance;
+        else if (Objects.equals(distanceType, "Manhattan")) this.distanceFunction = this::manhattanDistance;
         else this.distanceFunction = this::euclideanDistance;
     }
 
@@ -92,15 +93,21 @@ public class KNearestNeighbors {
         }
         return distanceVector;
     }
-
-    public void predict() {
+    private void normalize(){
+        DataNormalizer normalizer = new DataNormalizer((ArrayList<Article>) this.testArticles);
+        DataNormalizer normalizer_2 = new DataNormalizer((ArrayList<Article>) this.traineeArticles);
+        normalizer.normailize();
+        normalizer_2.normailize();
+    }
+    public void predict(boolean isNormalized) {
+        if (isNormalized) {this.normalize();}
         for (Article testArticle : this.testArticles) {
             for (Article traineeArticle : this.traineeArticles) {
                 double distance = this.distanceFunction.apply(testArticle.getCharacteristicVector(), traineeArticle.getCharacteristicVector());
                 testArticle.addDistanceVector(traineeArticle, distance);
             }
             testArticle.sortDistanceVector();
-            List<Article> kNearestArticles = new ArrayList<>(testArticle.getDistancesVector().keySet().stream().toList().subList(0, this.k));
+            List<Article> kNearestArticles = new ArrayList<>(testArticle.getDistancesVector().keySet()).subList(0, this.k);
             Map<String, Integer> kNearestPlaces = new LinkedHashMap<>();
             for (Article article : kNearestArticles) {
                 String place = article.getPlace();
@@ -115,7 +122,10 @@ public class KNearestNeighbors {
             kNearestPlaces.entrySet().stream()
                     .sorted(Map.Entry.comparingByValue())
                     .forEachOrdered(x -> sortedKNearestPlaces.put(x.getKey(), x.getValue()));
-            testArticle.setPredictedPlace(sortedKNearestPlaces.keySet().stream().toList().get(sortedKNearestPlaces.size() - 1));
+            testArticle.setPredictedPlace(new ArrayList<>(sortedKNearestPlaces.keySet()).get(sortedKNearestPlaces.size() - 1));
+//            System.out.println(testArticle.getPlace());
+//            System.out.println(testArticle.getPredictedPlace());
+//            System.out.println("#######################################");
         }
     }
 
