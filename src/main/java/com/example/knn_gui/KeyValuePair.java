@@ -1,4 +1,4 @@
-package java.knn_gui;
+package com.example.knn_gui;
 
 public class KeyValuePair {
     private final String label;

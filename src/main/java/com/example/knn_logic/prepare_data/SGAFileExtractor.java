@@ -1,4 +1,4 @@
-package java.knn_logic.prepare_data;
+package com.example.knn_logic.prepare_data;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

@@ -1,6 +1,6 @@
-package java.knn_logic.calculations;
+package com.example.knn_logic.calculations;
 
-import java.knn_logic.prepare_data.Article;
+import com.example.knn_logic.prepare_data.Article;
 
 import java.util.List;
 

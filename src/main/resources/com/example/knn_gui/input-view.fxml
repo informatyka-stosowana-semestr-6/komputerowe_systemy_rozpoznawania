@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import org.controlsfx.control.CheckComboBox?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="java.knn_gui.InputController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.knn_gui.InputController">
    <children>
       <VBox layoutX="16.0" layoutY="14.0" prefHeight="275.0" prefWidth="569.0">
          <children>

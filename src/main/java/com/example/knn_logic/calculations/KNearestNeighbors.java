@@ -1,10 +1,9 @@
-package java.knn_logic.calculations;
+package com.example.knn_logic.calculations;
 
-import java.knn_logic.prepare_data.Article;
+import com.example.knn_logic.prepare_data.Article;
 
 import java.util.*;
 import java.util.function.BiFunction;
-import java.util.stream.Collectors;
 
 public class KNearestNeighbors {
     List<Article> traineeArticles;

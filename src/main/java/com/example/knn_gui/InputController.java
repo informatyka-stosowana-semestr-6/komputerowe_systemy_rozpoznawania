@@ -1,14 +1,13 @@
-package java.knn_gui;
+package com.example.knn_gui;
 
-import java.knn_logic.calculations.*;
-import java.knn_logic.prepare_data.Article;
+import com.example.knn_logic.calculations.*;
+import com.example.knn_logic.prepare_data.Article;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.controlsfx.control.CheckComboBox;
 
 import java.net.URL;
-import java.security.Key;
 import java.util.*;
 import java.util.function.UnaryOperator;
 

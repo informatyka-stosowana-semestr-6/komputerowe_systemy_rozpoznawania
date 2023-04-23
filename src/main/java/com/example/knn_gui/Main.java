@@ -1,7 +1,7 @@
-package java.knn_gui;
+package com.example.knn_gui;
 
-import java.knn_logic.prepare_data.Article;
-import java.knn_logic.prepare_data.Loader;
+import com.example.knn_logic.prepare_data.Article;
+import com.example.knn_logic.prepare_data.Loader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends Application {
