@@ -4,7 +4,9 @@ import com.example.knn_logic.calculations.*;
 import com.example.knn_logic.prepare_data.Article;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import org.controlsfx.control.CheckComboBox;
 
 import java.net.URL;
@@ -12,6 +14,78 @@ import java.util.*;
 import java.util.function.UnaryOperator;
 
 public class InputController implements Initializable {
+    @FXML
+    public Label cm_USA_USA;
+    @FXML
+    public Label cm_UK_USA;
+    @FXML
+    public Label cm_Canada_USA;
+    @FXML
+    public Label cm_Germany_USA;
+    @FXML
+    public Label cm_France_USA;
+    @FXML
+    public Label cm_Japan_USA;
+    @FXML
+    public Label cm_USA_UK;
+    @FXML
+    public Label cm_UK_UK;
+    @FXML
+    public Label cm_Canada_UK;
+    @FXML
+    public Label cm_Germany_UK;
+    @FXML
+    public Label cm_France_UK;
+    @FXML
+    public Label cm_Japan_UK;
+    @FXML
+    public Label cm_USA_Canada;
+    @FXML
+    public Label cm_UK_Canada;
+    @FXML
+    public Label cm_Canada_Canada;
+    @FXML
+    public Label cm_Germany_Canada;
+    @FXML
+    public Label cm_France_Canada;
+    @FXML
+    public Label cm_Japan_Canada;
+    @FXML
+    public Label cm_USA_Germany;
+    @FXML
+    public Label cm_UK_Germany;
+    @FXML
+    public Label cm_Canada_Germany;
+    @FXML
+    public Label cm_Germany_Germany;
+    @FXML
+    public Label cm_France_Germany;
+    @FXML
+    public Label cm_Japan_Germany;
+    @FXML
+    public Label cm_USA_France;
+    @FXML
+    public Label cm_UK_France;
+    @FXML
+    public Label cm_Canada_France;
+    @FXML
+    public Label cm_Germany_France;
+    @FXML
+    public Label cm_France_France;
+    @FXML
+    public Label cm_Japan_France;
+    @FXML
+    public Label cm_USA_Japan;
+    @FXML
+    public Label cm_UK_Japan;
+    @FXML
+    public Label cm_Canada_Japan;
+    @FXML
+    public Label cm_Germany_Japan;
+    @FXML
+    public Label cm_France_Japan;
+    @FXML
+    public Label cm_Japan_Japan;
 
     @FXML
     private TextField knn_value;
@@ -65,6 +139,8 @@ public class InputController implements Initializable {
     private Label recall_Japan;
     @FXML
     private Label recall_Mean;
+    @FXML
+    private GridPane cm_grid;
 
     //F1
     @FXML
@@ -114,61 +190,88 @@ public class InputController implements Initializable {
                 new KeyValuePair("50/50", 0.5),
                 new KeyValuePair("40/60", 0.4)));
 
-        metric.getItems().addAll(Arrays.asList("Euklidesowa","Manhattan","Czebyszewa"));
+        metric.getItems().addAll(Arrays.asList("Euklidesowa", "Manhattan", "Czebyszewa"));
         characteristic.getItems().addAll(Arrays.asList(CharacteristicsEnum.C1.getValue(),
-                                                        CharacteristicsEnum.C2.getValue(),
-                                                        CharacteristicsEnum.C3.getValue(),
-                                                        CharacteristicsEnum.C4.getValue(),
-                                                        CharacteristicsEnum.C6.getValue(),
-                                                        CharacteristicsEnum.C7.getValue(),
-                                                        CharacteristicsEnum.C8.getValue(),
-                                                        CharacteristicsEnum.C9.getValue(),
-                                                        CharacteristicsEnum.C10.getValue()));
+                CharacteristicsEnum.C2.getValue(),
+                CharacteristicsEnum.C3.getValue(),
+                CharacteristicsEnum.C4.getValue(),
+                CharacteristicsEnum.C5.getValue(),
+                CharacteristicsEnum.C6.getValue(),
+                CharacteristicsEnum.C7.getValue(),
+                CharacteristicsEnum.C8.getValue(),
+                CharacteristicsEnum.C9.getValue(),
+                CharacteristicsEnum.C10.getValue()));
 
         metric.getSelectionModel().selectFirst();
         knn_value.setText("3");
         test_train_ratio.getSelectionModel().selectFirst();
 
     }
-    private List<String> getCharacteristics(){
+
+    private List<String> getCharacteristics() {
         return characteristic.getCheckModel().getCheckedItems();
     }
+
     @FXML
     protected void onButtonStart(List<Article> articles) {
         Characteristics characteristics = new Characteristics(this.getCharacteristics());
         System.out.println(this.getCharacteristics());
-        for (Article article : articles) {characteristics.addCharacteristicVectorToArticle(article);}
+        for (Article article : articles) {
+            characteristics.addCharacteristicVectorToArticle(article);
+        }
         start_button.setDisable(true);
         double splitPoint = test_train_ratio.getValue().getValue();
         int splitIndex = (int) (articles.size() * splitPoint);
-        if(seed_checkbox.isSelected()){
+        if (seed_checkbox.isSelected()) {
             Collections.shuffle(articles, new Random(Integer.parseInt(seed_value.getText())));
-        }
-        else {
+        } else {
             Collections.shuffle(articles);
         }
 
         List<Article> traineeArticles = new ArrayList<>(articles.subList(0, splitIndex));
         List<Article> testArticles = new ArrayList<>(articles.subList(splitIndex, articles.size()));
 
-        for (Article article : traineeArticles) {article.setArticleType("train");}
-        for (Article article : testArticles) {article.setArticleType("test");}
+        for (Article article : traineeArticles) {
+            article.setArticleType("train");
+        }
+        for (Article article : testArticles) {
+            article.setArticleType("test");
+        }
 
         KNearestNeighbors knn = new KNearestNeighbors(traineeArticles, testArticles, metric.getValue(), Integer.parseInt(knn_value.getText()));
         knn.predict(data_normalized.isSelected());
         start_button.setDisable(false);
+
+
+
+        // Confusion Matrix
+        ConfusionMatrix confusionMatrixObj = new ConfusionMatrix(testArticles);
+        confusionMatrixObj.calculateMatrix();
+        int[][] confusionMatrixTable = confusionMatrixObj.getConfusionMatrix();
+        int columns = cm_grid.getColumnCount();
+        for (int colIndex = 1; colIndex < columns; colIndex++) {
+            for (int rowIndex = 1; rowIndex < cm_grid.getRowCount(); rowIndex++) {
+                Node node = cm_grid.getChildren().get((12 + 6 * (colIndex - 1) + (rowIndex)) - 1);
+                if (node instanceof Label) {
+                    ((Label) node).setText(String.valueOf(confusionMatrixTable[colIndex - 1][rowIndex - 1]));
+                }
+            }
+        }
+
+
+
         QualityMeasures qm = new QualityMeasures(articles);
 //        System.out.println(articles);
 //        System.out.println(qm.calculateAccuracy());
         accuracy.setText((Double.toString(qm.calculateAccuracy())));
 
         //Zmienne pomocnicze
-        double precision_USA_value = (double) Math.round(qm.calculatePrecision("usa") * 100000)/100000;
-        double precision_UK_value = (double) Math.round(qm.calculatePrecision("uk") * 100000)/100000;
-        double precision_Canada_value = (double) Math.round(qm.calculatePrecision("canada") * 100000)/100000;
-        double precision_Germany_value = (double) Math.round(qm.calculatePrecision("west-germany") * 100000)/100000;
-        double precision_France_value = (double) Math.round(qm.calculatePrecision("france") * 100000)/100000;
-        double precision_Japan_value = (double) Math.round(qm.calculatePrecision("japan") * 100000)/100000;
+        double precision_USA_value = (double) Math.round(qm.calculatePrecision("usa") * 100000) / 100000;
+        double precision_UK_value = (double) Math.round(qm.calculatePrecision("uk") * 100000) / 100000;
+        double precision_Canada_value = (double) Math.round(qm.calculatePrecision("canada") * 100000) / 100000;
+        double precision_Germany_value = (double) Math.round(qm.calculatePrecision("west-germany") * 100000) / 100000;
+        double precision_France_value = (double) Math.round(qm.calculatePrecision("france") * 100000) / 100000;
+        double precision_Japan_value = (double) Math.round(qm.calculatePrecision("japan") * 100000) / 100000;
 
         precision_USA.setText(Double.toString(precision_USA_value));
         precision_UK.setText(Double.toString(precision_UK_value));
@@ -176,15 +279,16 @@ public class InputController implements Initializable {
         precision_Germany.setText(Double.toString(precision_Germany_value));
         precision_France.setText(Double.toString(precision_France_value));
         precision_Japan.setText(Double.toString(precision_Japan_value));
-        precision_Mean.setText(Double.toString((double) Math.round(100000 * (precision_USA_value + precision_UK_value + precision_Canada_value + precision_Germany_value + precision_France_value + precision_Japan_value) / 6) /100000));
+//        precision_Mean.setText(Double.toString((double) Math.round(100000 * (precision_USA_value + precision_UK_value + precision_Canada_value + precision_Germany_value + precision_France_value + precision_Japan_value) / 6) / 100000));
+        precision_Mean.setText(Double.toString((double) Math.round(qm.calculatePrecisionMean(confusionMatrixObj)* 100000) / 100000));
 
         //Zmienne pomocnicze
-        double recall_USA_value = (double) Math.round(qm.calculateRecall("usa") * 100000)/100000;
-        double recall_UK_value = (double) Math.round(qm.calculateRecall("uk") * 100000)/100000;
-        double recall_Canada_value = (double) Math.round(qm.calculateRecall("canada") * 100000)/100000;
-        double recall_Germany_value = (double) Math.round(qm.calculateRecall("west-germany") * 100000)/100000;
-        double recall_France_value = (double) Math.round(qm.calculateRecall("france") * 100000)/100000;
-        double recall_Japan_value = (double) Math.round(qm.calculateRecall("japan") * 100000)/100000;
+        double recall_USA_value = (double) Math.round(qm.calculateRecall("usa") * 100000) / 100000;
+        double recall_UK_value = (double) Math.round(qm.calculateRecall("uk") * 100000) / 100000;
+        double recall_Canada_value = (double) Math.round(qm.calculateRecall("canada") * 100000) / 100000;
+        double recall_Germany_value = (double) Math.round(qm.calculateRecall("west-germany") * 100000) / 100000;
+        double recall_France_value = (double) Math.round(qm.calculateRecall("france") * 100000) / 100000;
+        double recall_Japan_value = (double) Math.round(qm.calculateRecall("japan") * 100000) / 100000;
 
         recall_USA.setText(Double.toString(recall_USA_value));
         recall_UK.setText(Double.toString(recall_UK_value));
@@ -192,16 +296,18 @@ public class InputController implements Initializable {
         recall_Germany.setText(Double.toString(recall_Germany_value));
         recall_France.setText(Double.toString(recall_France_value));
         recall_Japan.setText(Double.toString(recall_Japan_value));
-        recall_Mean.setText(Double.toString((double) Math.round(100000 * (recall_USA_value + recall_UK_value + recall_Canada_value + recall_Germany_value + recall_France_value + recall_Japan_value) / 6) /100000));
+//        recall_Mean.setText(Double.toString((double) Math.round(100000 * (recall_USA_value + recall_UK_value + recall_Canada_value + recall_Germany_value + recall_France_value + recall_Japan_value) / 6) / 100000));
+        recall_Mean.setText(Double.toString((double) Math.round(qm.calculateRecallMean(confusionMatrixObj)* 100000) / 100000));
+
 
 
         //Zmienne pomocnicze
-        double f1_USA_value = (double) Math.round(100000 * 2 * ((precision_USA_value * recall_USA_value) / (precision_USA_value + recall_USA_value)))/100000;
-        double f1_UK_value = (double) Math.round(100000 * 2 * ((precision_UK_value * recall_UK_value) / (precision_UK_value + recall_UK_value)))/100000;
-        double f1_Canada_value = (double) Math.round(100000 * 2 * ((precision_Canada_value * recall_Canada_value) / (precision_Canada_value + recall_Canada_value)))/100000;
-        double f1_Germany_value = (double) Math.round(100000 * 2 * ((precision_Germany_value * recall_Germany_value) / (precision_Germany_value + recall_Germany_value)))/100000;
-        double f1_France_value = (double) Math.round(100000 * 2 * ((precision_France_value * recall_France_value) / (precision_France_value + recall_France_value)))/100000;
-        double f1_Japan_value = (double) Math.round(100000 * 2 * ((precision_Japan_value * recall_Japan_value) / (precision_Japan_value + recall_Japan_value))) /100000;
+        double f1_USA_value = (double) Math.round(100000 * 2 * ((precision_USA_value * recall_USA_value) / (precision_USA_value + recall_USA_value))) / 100000;
+        double f1_UK_value = (double) Math.round(100000 * 2 * ((precision_UK_value * recall_UK_value) / (precision_UK_value + recall_UK_value))) / 100000;
+        double f1_Canada_value = (double) Math.round(100000 * 2 * ((precision_Canada_value * recall_Canada_value) / (precision_Canada_value + recall_Canada_value))) / 100000;
+        double f1_Germany_value = (double) Math.round(100000 * 2 * ((precision_Germany_value * recall_Germany_value) / (precision_Germany_value + recall_Germany_value))) / 100000;
+        double f1_France_value = (double) Math.round(100000 * 2 * ((precision_France_value * recall_France_value) / (precision_France_value + recall_France_value))) / 100000;
+        double f1_Japan_value = (double) Math.round(100000 * 2 * ((precision_Japan_value * recall_Japan_value) / (precision_Japan_value + recall_Japan_value))) / 100000;
 
         f1_USA.setText(Double.toString(f1_USA_value));
         f1_UK.setText(Double.toString(f1_UK_value));
@@ -209,12 +315,14 @@ public class InputController implements Initializable {
         f1_Germany.setText(Double.toString(f1_Germany_value));
         f1_France.setText(Double.toString(f1_France_value));
         f1_Japan.setText(Double.toString(f1_Japan_value));
-        f1_Mean.setText(Double.toString((double) Math.round(100000 * (f1_USA_value + f1_UK_value + f1_Canada_value + f1_Germany_value + f1_France_value + f1_Japan_value) / 6) /100000));
+//        f1_Mean.setText(Double.toString((double) Math.round(100000 * (f1_USA_value + f1_UK_value + f1_Canada_value + f1_Germany_value + f1_France_value + f1_Japan_value) / 6) / 100000));
+        f1_Mean.setText(Double.toString((double) Math.round(qm.calculateF1Mean(confusionMatrixObj)* 100000) / 100000));
+
 
     }
 
     @FXML
-    protected void onCheckboxClicked(){
+    protected void onCheckboxClicked() {
         seed_value.setDisable(!seed_checkbox.isSelected());
     }
 

@@ -27,7 +27,7 @@ public class Main extends Application {
         Parent root = (Parent)fxmlLoader.load();
         InputController controller = fxmlLoader.<InputController>getController();
         controller.getStart_button().setOnAction(event -> {controller.onButtonStart(articles);});
-        Scene scene = new Scene(root, 600, 800);
+        Scene scene = new Scene(root, 1150, 700);
         stage.setTitle("KNN Classification");
         stage.setScene(scene);
 

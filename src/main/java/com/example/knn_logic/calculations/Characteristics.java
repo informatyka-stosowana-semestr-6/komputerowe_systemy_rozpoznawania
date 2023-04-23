@@ -94,7 +94,24 @@ public class Characteristics {
         /*
         Liczba unikalnych słów.
          */
-        throw new UnsupportedOperationException("Not implemented yet.");
+        Map<String, Integer> wordsOccurrence = new HashMap<>();
+        List<String> words = List.of(article.getBody().toLowerCase().split("\\W+"));
+        for (String word : words) {
+            if (wordsOccurrence.containsKey(word)) {
+                int lastValue = wordsOccurrence.get(word);
+                wordsOccurrence.put(word, lastValue + 1);
+            } else {
+                wordsOccurrence.put(word, 1);
+            }
+        }
+        int uniqueValues = 0;
+        for (int value :
+                wordsOccurrence.values()) {
+            if (value == 1) {
+                uniqueValues += 1;
+            }
+        }
+        return uniqueValues;
     }
 
     private String c6(Article article) {

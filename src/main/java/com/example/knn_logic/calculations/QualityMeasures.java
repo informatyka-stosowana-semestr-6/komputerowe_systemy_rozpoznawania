@@ -2,10 +2,12 @@ package com.example.knn_logic.calculations;
 
 import com.example.knn_logic.prepare_data.Article;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QualityMeasures {
     private List<Article> articles;
+    private List<String> places = List.of("usa", "uk", "canada", "west-germany", "france", "japan");
 
     public QualityMeasures(List<Article> articles){
         this.articles = articles;
@@ -46,10 +48,11 @@ public class QualityMeasures {
         return (double) truePositive /(truePositive+falseNegative);
     }
 
-    public double calculateF1(){
-        // TODO: 16.04.2023 Calculate F1
+    public double calculateF1(String place){
+        double precision = calculatePrecision(place);
+        double recall = calculateRecall(place);
 
-        return 0;
+        return (2 * precision * recall)/(precision + recall);
     }
 
     public double calculateAccuracy(){
@@ -67,5 +70,53 @@ public class QualityMeasures {
         System.out.println("True positive: " + truePositive);
         System.out.println("All articles: " + allArticles);
         return (double) truePositive/(allArticles);
+    }
+
+    public double calculatePrecisionMean(ConfusionMatrix cm){
+        double licznik = 0.0;
+        double mianownik = 0.0;
+        for(int i = 0; i < 6; i++){
+            double precision = calculatePrecision(places.get(i));
+            if (Double.isNaN(precision)){
+                precision = 0.0;
+            }
+            licznik += precision * cm.getConfusionMatrix()[i][i];
+            mianownik += cm.getConfusionMatrix()[i][i];
+        }
+        System.out.println(licznik);
+        System.out.println(mianownik);
+        return licznik/mianownik;
+    }
+
+    public double calculateRecallMean(ConfusionMatrix cm){
+        double licznik = 0.0;
+        double mianownik = 0.0;
+        for(int i = 0; i < 6; i++){
+            double recall = calculateRecall(places.get(i));
+            if (Double.isNaN(recall)){
+                recall = 0.0;
+            }
+            licznik += recall * cm.getConfusionMatrix()[i][i];
+            mianownik += cm.getConfusionMatrix()[i][i];
+        }
+        System.out.println(licznik);
+        System.out.println(mianownik);
+        return licznik/mianownik;
+    }
+
+    public double calculateF1Mean(ConfusionMatrix cm){
+        double licznik = 0.0;
+        double mianownik = 0.0;
+        for(int i = 0; i < 6; i++){
+            double f1 = calculateF1(places.get(i));
+            if (Double.isNaN(f1)){
+                f1 = 0.0;
+            }
+            licznik += f1 * cm.getConfusionMatrix()[i][i];
+            mianownik += cm.getConfusionMatrix()[i][i];
+        }
+        System.out.println(licznik);
+        System.out.println(mianownik);
+        return licznik/mianownik;
     }
 }
