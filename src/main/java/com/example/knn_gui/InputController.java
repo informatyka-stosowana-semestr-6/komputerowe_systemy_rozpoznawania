@@ -188,7 +188,8 @@ public class InputController implements Initializable {
                 new KeyValuePair("70/30", 0.7),
                 new KeyValuePair("60/40", 0.6),
                 new KeyValuePair("50/50", 0.5),
-                new KeyValuePair("40/60", 0.4)));
+                new KeyValuePair("40/60", 0.4),
+                new KeyValuePair("10/90", 0.1)));
 
         metric.getItems().addAll(Arrays.asList("Euklidesowa", "Manhattan", "Czebyszewa"));
         characteristic.getItems().addAll(Arrays.asList(CharacteristicsEnum.C1.getValue(),
@@ -202,6 +203,7 @@ public class InputController implements Initializable {
                 CharacteristicsEnum.C9.getValue(),
                 CharacteristicsEnum.C10.getValue()));
 
+        characteristic.getCheckModel().checkAll();
         metric.getSelectionModel().selectFirst();
         knn_value.setText("3");
         test_train_ratio.getSelectionModel().selectFirst();
